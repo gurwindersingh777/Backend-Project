@@ -50,8 +50,8 @@ mongoose.plugin(mongooseAggregatePaginate);
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = bcryrpt.hash(this.password, 10);
-  next()
+  this.password = await bcryrpt.hash(this.password, 10);
+  next
 })
 
 userSchema.methods.isPasswordCorrect = async function (password) {
